@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
+</head>
+<body>
+
+    <h1>File and Image upload with nodejs</h1>
+    <form action="/uploadfile" id="uploadform" enctype="multipart/form-data" method="post">
+    <input type="file" name="myfile"><br><br>
+    <input type="submit" value="Upload Image" name="submit"><br><br>
+    <span id="status"></span>
+    </form>
+
+<script>
+$(document).ready(function(){
+$('#uploadforms').submit(function(){
+    $('#status').empty().text("File is uploading..");
+
+    $(this).ajaxSubmit({
+        error:function(xhr){
+            status('Error:'+xhr.status);
+        },
+        success:function(response) {
+            console.log(response);
+            $("#status").empty().text(response);
+        }
+    });
+    return false;
+});
+});
+</script>    
+</body>
+</html>
